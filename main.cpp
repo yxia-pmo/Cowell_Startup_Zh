@@ -59,7 +59,8 @@ void Initia(int order,double h)
 
   ElemToCor(_mu,0.0,_InitialElem,R0,V0);
   A0=CalcuAcc(R0);
-  A1=A0; Af1=A0;
+  R=R0+V0*h+A0*(h*h/2); A1=CalcuAcc(R);
+  R=R0*2-R;             Af1=CalcuAcc(R);
 
   _TBD.WriteF(-1,Af1);   _TBD.WriteF(0,A0);    _TBD.WriteF(1,A1);
 
@@ -143,7 +144,7 @@ int main()
 
   Period=6.283185307179586476925286766559L/sqrtl(_mu/(_InitialElem[0]*_InitialElem[0]*_InitialElem[0]));
 
-  h=2;
+  h=1;
   Initia(12,h);
 
   max=-1;  cnt=0; pb=0;
